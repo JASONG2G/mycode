@@ -37,17 +37,17 @@ rooms = {
             'Hall' : {
                   'south' : 'Kitchen',
                   'east'  : 'Dining Room',
-                  'item'  : 'key'
+                  'item'  : ''
                 },
 
             'Kitchen' : {
                   'north' : 'Hall',
-                  'item'  : 'sword',
+                  'item'  : '',
                 },
             'Dining Room' : {
                   'west' : 'Hall',
                   'south': 'Garden',
-                  'item' : 'potion',
+                  'item' : '',
                   'north' : 'Pantry',
                },
             'Garden' : {
@@ -55,27 +55,31 @@ rooms = {
                },
             'Pantry' : {
                   'south' : 'Dining Room',
-                  'item' : 'cookie',
+                  'item' : '',
             }
          }
 
 #start the player in the Hall
 currentRoom = 'Hall'
 
-showInstructions()
 
-def randomMonster():
-    all_rooms = ['Hall','Kitchen', 'Dining Room', 'Garden', 'Pantry']
-    target_room = all_rooms[randint(0,4)]
-    rooms[target_room]["item"] = 'monster'
+# initialize item location
+def rand_item():
+    items = ['key','monster','potion','cookie']
+    for room in rooms:    
+        if 'item' in rooms[room]:
+            rooms[room]['item'] = items[randint(0,3)]
+
+rand_item()
+
+showInstructions()
 
 #loop forever
 while True:
-
   showStatus()
    
   # randomize monster location
-  randomMonster()
+  # randomMonster()
   #get the player's next 'move'
   #.split() breaks it up into an list array
   #eg typing 'go east' would give the list:
