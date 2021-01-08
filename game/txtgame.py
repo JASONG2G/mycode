@@ -2,6 +2,10 @@
 
 # Replace RPG starter project with this code when new instructions are live
 
+from random import randint
+
+
+
 def showInstructions():
   #print a main menu and the commands
   print('''
@@ -38,7 +42,7 @@ rooms = {
 
             'Kitchen' : {
                   'north' : 'Hall',
-                  'item'  : 'monster',
+                  'item'  : 'sword',
                 },
             'Dining Room' : {
                   'west' : 'Hall',
@@ -60,11 +64,18 @@ currentRoom = 'Hall'
 
 showInstructions()
 
+def randomMonster():
+    all_rooms = ['Hall','Kitchen', 'Dining Room', 'Garden', 'Pantry']
+    target_room = all_rooms[randint(0,4)]
+    rooms[target_room]["item"] = 'monster'
+
 #loop forever
 while True:
 
   showStatus()
-
+   
+  # randomize monster location
+  randomMonster()
   #get the player's next 'move'
   #.split() breaks it up into an list array
   #eg typing 'go east' would give the list:
